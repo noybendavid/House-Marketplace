@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 import {
 	collection,
 	getDocs,
@@ -7,22 +7,22 @@ import {
 	orderBy,
 	limit,
 	startAfter
-} from 'firebase/firestore';
-import { db } from '../Firbase.config';
-import { toast } from 'react-toastify';
-import Spinner from '../components/Spinner';
-import { async } from '@firebase/util';
-import ListingItem from '../components/ListingItem';
+} from 'firebase/firestore'
+import { db } from '../Firbase.config'
+import { toast } from 'react-toastify'
+import Spinner from '../components/Spinner'
+import { async } from '@firebase/util'
+import ListingItem from '../components/ListingItem'
 
 function Offers() {
-	const [listings, setListings] = useState(null);
-	const [loading, setLoading] = useState(true);
+	const [listings, setListings] = useState(null)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchListings = async () => {
 			try {
 				//Get Reference
-				const listingsRef = collection(db, 'listings');
+				const listingsRef = collection(db, 'listings')
 
 				//Create a query
 				const q = query(
@@ -30,28 +30,28 @@ function Offers() {
 					where('offer', '==', true),
 					orderBy('timestamp', 'desc'),
 					limit(10)
-				);
+				)
 
 				//Execute query
-				const querySnap = await getDocs(q);
+				const querySnap = await getDocs(q)
 
-				const listings = [];
+				const listings = []
 
 				querySnap.forEach((doc) => {
 					return listings.push({
 						id: doc.id,
 						data: doc.data()
-					});
-				});
+					})
+				})
 
-				setListings(listings);
-				setLoading(false);
+				setListings(listings)
+				setLoading(false)
 			} catch (error) {
-				toast.error('Could not fetch listings');
+				toast.error('Could not fetch listings')
 			}
-		};
-		fetchListings();
-	}, []);
+		}
+		fetchListings()
+	}, [])
 
 	return (
 		<div className='category'>
@@ -79,7 +79,7 @@ function Offers() {
 				<p>There are no current offers</p>
 			)}
 		</div>
-	);
+	)
 }
 
-export default Offers;
+export default Offers

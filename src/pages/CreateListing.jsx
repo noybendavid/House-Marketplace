@@ -14,7 +14,7 @@ import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
 
 function CreateListing() {
-  const [geolocationEnabled, setGeolocationEnabled] = useState(true)
+	const [geolocationEnabled, setGeolocationEnabled] = useState(true)
 
 	const [loading, setLoading] = useState(false)
 	const [formData, setFormData] = useState({
@@ -29,8 +29,8 @@ function CreateListing() {
 		regularPrice: 0,
 		discountedPrice: 0,
 		images: {},
-    latitude: 0,
-    longitude: 0,
+		latitude: 0,
+		longitude: 0
 	})
 
 	const {
@@ -45,8 +45,8 @@ function CreateListing() {
 		regularPrice,
 		discountedPrice,
 		images,
-    latitude,
-    longitude,
+		latitude,
+		longitude
 	} = formData
 
 	const auth = getAuth()
@@ -104,9 +104,9 @@ function CreateListing() {
 			toast.error('Please enter a correct address')
 			return
 		} else {
-      geolocation.lat = latitude
-      geolocation.lng = longitude
-    }
+			geolocation.lat = latitude
+			geolocation.lng = longitude
+		}
 
 		// Store image in firebase
 		const storeImage = async (image) => {
