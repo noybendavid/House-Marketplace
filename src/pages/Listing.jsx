@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
-import { db } from '../Firbase.config'
+import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 import ShareIcon from '../assets/svg/shareIcon.svg'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
@@ -48,11 +48,6 @@ function Listing() {
 				pagination={{ clickable: true }}
 				navigation
 			>
-				{/* 		style={{
-									background: `url(${listing.imageUrls[index]}) center no-repeat`,
-									backgroundSize: 'cover',
-									padding: '150px',
-								}}*/}
 				{listing.imageUrls.map((data, index) => {
 					return (
 						<SwiperSlide key={index}>

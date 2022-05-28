@@ -10,7 +10,7 @@ import {
 } from 'firebase/auth'
 import OAuth from '../components/OAuth'
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../Firbase.config'
+import { db } from '../firebase.config'
 
 function SignUp() {
 	const [showPassword, setShowPassword] = useState(false)

@@ -7,7 +7,7 @@ import {
 	getDownloadURL
 } from 'firebase/storage'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { db } from '../Firbase.config'
+import { db } from '../firebase.config'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
@@ -29,8 +29,6 @@ function CreateListing() {
 		regularPrice: 0,
 		discountedPrice: 0,
 		images: {},
-		latitude: 0,
-		longitude: 0
 	})
 
 	const {
@@ -45,8 +43,6 @@ function CreateListing() {
 		regularPrice,
 		discountedPrice,
 		images,
-		latitude,
-		longitude
 	} = formData
 
 	const auth = getAuth()
@@ -91,21 +87,20 @@ function CreateListing() {
 		)
 		const data = await response.json()
 
-		geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
-		geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
+
+		geolocation.lat = data.results[0].geometry.location.lat ?? 0
+		geolocation.lng = data.results[0].geometry.location.lng ?? 0
+
 
 		location =
 			data.status === 'ZERO_RESULTS'
 				? undefined
-				: data.results[0]?.formatted_address
+				: data.results[0].formatted_address
 
 		if (location === undefined || location.includes('undefined')) {
 			setLoading(false)
 			toast.error('Please enter a correct address')
 			return
-		} else {
-			geolocation.lat = latitude
-			geolocation.lng = longitude
 		}
 
 		// Store image in firebase
